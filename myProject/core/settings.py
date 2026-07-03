@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,15 +86,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql', # Fixed for PostgreSQL
-        'NAME': 'POSTGRES_DB', # Your database name
-        'USER': 'POSTGRES_USER', # The user who is assigned to the database
-        'PASSWORD': 'POSTGRES_PASSWORD', # User password
-        'HOST': 'localhost', # Use your database domain (domain.com), if using other hosting site for database
-        'PORT': '5432', # Fixed for PostgreSQL
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
-        # For Production use, it is recommended to use environment variables for 'NAME', 'USER', 'PASSWORD' and 'HOST'
 }
 
 
